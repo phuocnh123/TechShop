@@ -1,0 +1,101 @@
+﻿@section script{
+    <script src="~/js/product/create.js"></script>
+}
+@model List<Infrastructure.Categories.CategoryViewModel>
+<div class="page-container">
+
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet light">
+                        <div class="portlet-title">
+
+                            <div class="caption col-md-9">
+                                <span class="caption-subject font-green-sharp bold uppercase" id="span-title">
+                                    
+                                </span>
+                            </div>
+
+                            <div class="portlet-body">
+                                <div class="table-toolbar">
+
+                                    <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
+
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            
+                                            <button id="btn-save" type="button" class="btn btn-success">Save</button>
+                                           
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <form method="post" enctype="multipart/form-data" action="/product/create" id="frm-save">
+                                @Html.AntiForgeryToken()
+                                <input hidden type="text" name="ProductId">
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="select-Status">Category</label>
+                                    <select class="form-control" id="select-Status" name="CategoryId">
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                       
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="">Product Name</label>
+                                    <input type="text" class="form-control" name="ProductName" style="color:mediumvioletred">
+                                </div>
+
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="">Price</label>
+                                    <input type="number" class="form-control"  name="Price">
+                                </div>
+
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="">Discount Price</label>
+                                    <input type="number" class="form-control" name="DiscountPrice">
+                                </div>
+
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="">Quantity</label>
+                                    <input value="100" type="number" class="form-control" name="Quantity">
+                                </div>
+
+                                <div class="form-group col-md-6 col-xs-12">
+                                    <label for="">Images</label>
+                                    <input accept="image/png, image/jpeg" type="file" multiple class="form-control" name="Images">
+                                </div>
+
+                                <div class="form-group col-md-12 col-xs-12">
+                                    <label for="">Detail</label>
+                                    <textarea class="form-control" name="Detail"></textarea>
+                                   
+                                </div>
+
+                                <div class="form-group col-md-12 col-xs-12">
+                                    <label for="">Description</label>
+                                    <textarea class="form-control" name="Description"></textarea>
+                                </div>
+
+
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

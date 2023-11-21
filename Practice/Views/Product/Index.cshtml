@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@section script{
+    <script src="~/js/product.js"></script>
+}
+@model List<LearnCategory>
+<h1>Index</h1>
+<input id="txt-search" type="text" placeholder="nhập từ khóa" /> <button id="btn-search">Search</button>
+<select>
+    <option value="">Tất cả</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id" >@item.Name</option>
+    }
+    
+</select>
+
+<div id="product-list">
+    @*RenderPartial view*@
+
+</div>
+
+<button id="btn-loadmore">Load more</button>
+
+

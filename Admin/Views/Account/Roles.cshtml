@@ -1,0 +1,73 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+<div class="page-container">
+
+    <div class="page-content">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet light">
+                        <div class="portlet-title">
+
+                            <div class="caption col-md-12">
+                                <span class="caption-subject font-green-sharp bold uppercase">
+                                    Manage Roles
+                                </span>
+                            </div>
+
+                            <div class="portlet-body">
+
+                                <div class="table-toolbar">
+
+                                    <div class="col-md-3 col-sm-12 col-xs-12 pull-left">
+                                        <a class="btn btn-success" href="/account/createrole">Create Role</a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="table-responsive col-md-12">
+                            <table class="table table-bordered table-hover table-striped table-responsive">
+                                <thead>
+                                    <tr class="text-center">
+                                        <td>RoleName</td>
+                                        <td>Utilites</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-content">
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Name</td>
+                                            <td>
+                                                <a class="btn default btn-xs purple" href="/" title="Update"> <span class="glyphicon glyphicon-edit"></span></a>
+
+                                                <a class="btn default btn-xs red" href="/" title="Delete">  <span class="glyphicon glyphicon-trash"></span></a>
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

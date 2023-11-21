@@ -1,0 +1,184 @@
+﻿@section script{
+    <script src="~/js/product/index.js"></script>
+}
+@model List<Infrastructure.Categories.CategoryViewModel>
+<div class="page-container">
+
+    <div class="page-content">
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet light">
+                        <div class="portlet-title">
+
+                            <div class="caption col-md-12">
+                                <span class="caption-subject font-green-sharp bold uppercase">
+                                    Quản lý khóa học
+                                </span>
+                            </div>
+
+                            <div class="portlet-body">
+
+                                <div class="table-toolbar">
+
+                                    <div class="col-md-3 col-sm-12 col-xs-12 pull-left">
+                                        <a class="btn btn-success" href="#modal-add" data-toggle="modal" id="btn-add">Tạo mới</a>
+
+                                    </div>
+                                    <div class="form-group col-md-3 col-xs-12">
+                                        
+                                        <select class="form-control" id="categoryId" name="CategoryId">
+                                            <option value="">All</option>
+                                            @foreach (var item in Model)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-3 col-xs-12">
+                                        <input placeholder="enter the keyword" class="form-control" id="keyword" />
+                                    </div>
+
+                                    <div class="col-md-3 col-xs-12">
+                                        
+                                        <button id="btn-search" class="btn btn-success">Search</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="table-responsive col-md-12">
+                            <table class="table table-bordered table-hover table-striped table-responsive">
+                                <thead>
+                                    <tr class="text-center">
+                                        <td>Product Name</td>
+                                        <td>Category</td>
+                                        <td>Price</td>
+                                        <td>Discount Price</td>
+                                        <td>Quantity</td>
+                                        <td>Utilites</td>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="table-content">
+                                    @*partial view*@
+                                </tbody>
+
+                            </table>
+                            <div class="pagination" id="pagination"></div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!--Modal arear-->
+
+        <div class="modal-area">
+
+            <div class="modal fade" id="modal-add" tabindex="-1" role="columnheader" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">Thêm mới, cập nhật khóa học </h4>
+                            <p hidden id="hid-id"></p>
+                        </div>
+                        <form class="modal-body" id="frm-save">
+
+                            <div class="form-group">
+                                <label for="txt-CourseName">Tên khóa học</label>
+                                <input type="text" class="form-control" id="txt-CourseName" name="CourseName" style="color:mediumvioletred">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-Image">Ảnh đại diện</label>
+                                <input type="text" class="form-control" id="txt-Image" name="Image">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-SeoTittle">Tiêu đề Seo</label>
+                                <input type="text" class="form-control" id="txt-SeoTittle" name="SeoTittle">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txt-SeoDescription">Nội dung Seo</label>
+                                <input type="text" class="form-control" id="txt-SeoDescription" name="SeoDescription">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-AmountLesson">Số lượng bài học</label>
+                                <input type="number" class="form-control" id="txt-AmountLesson" name="AmountLesson">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-StudyingTime">Thời lượng</label>
+                                <input type="number" class="form-control" id="txt-StudyingTime" name="StudyingTime">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="txt-Slogan">Slogan khóa học</label>
+                                <input type="text" class="form-control" id="txt-Slogan" name="Slogan">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-Banner">Banner khóa học</label>
+                                <input type="text" class="form-control" id="txt-Banner" name="Banner">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-GradientBackGround">Gradient nền khóa học</label>
+                                <input type="text" class="form-control col-md-8" id="txt-GradientBackGround" name="GradientBackGround">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-Seen">Lượt xem</label>
+                                <input type="text" class="form-control col-md-8" id="txt-Seen" name="Seen">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-Status">Trạng thái</label>
+                                <select class="form-control" id="txt-Status" name="Status">
+                                    <option value="1">Khóa học đang quảng cáo</option>
+                                    <option value="2">Khóa học không quảng cáo</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-ShortName">Tên rút gọn</label>
+                                <input type="text" class="form-control col-md-8" id="txt-ShortName" name="ShortName">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-Summary">Nội dung tóm tắt</label>
+                                <input type="text" class="form-control col-md-8" id="txt-Summary" name="Summary">
+                            </div>
+                            <div class="form-group">
+                                <label for="txt-CourseCateId">Danh mục khóa học</label>
+                                <select class="form-control" id="txt-CourseCateId" name="CourseCateId">
+                                    <option value="">Chọn danh mục</option>
+                                    <option value="">Chọn danh mục</option>
+                                    <option value="">Chọn danh mục</option>
+                                    <option value="">Chọn danh mục</option>
+
+                                </select>
+                            </div>
+
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn default" data-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn blue" id="btn-save">Cập nhật</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Kết thúc Modal thêm, update-->
+
+        </div>
+
+    </div>
+</div>
+

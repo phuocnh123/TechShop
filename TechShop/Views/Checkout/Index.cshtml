@@ -1,0 +1,137 @@
+﻿@using Newtonsoft.Json
+@using Infrastructure.Commons
+@section script{
+    <script src="~/js/checkout/index.js"></script>
+}
+@{
+    var checkout = TempData["checkout"]!=null ? (string)TempData["checkout"] : string.Empty;
+    var data = JsonConvert.DeserializeObject<ResponseResult>(checkout);
+    var message = data != null ? data.Message : string.Empty;
+    var status = data != null ? data.StatusCode : default;
+}
+@model CheckoutViewModel
+<!-- BREADCRUMB -->
+<p hidden id="check-out-message">@message</p>
+<p hidden id="check-out-status">@status</p>
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Checkout</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Checkout</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        @if (Model.Items != null && Model.Items.Any())
+        {
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md-7">
+                    <!-- Billing Details -->
+                    <form id="frm-customer-info" class="billing-details" method="post" action="/checkout/placeorder">
+                        @Html.AntiForgeryToken()
+                        <div class="section-title">
+                            <h3 class="title">Shipping address</h3>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="FirstName" placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="LastName" placeholder="Last Name">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="email" name="Email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="Address" placeholder="Address">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="tel" name="PhoneNumber" placeholder="Telephone">
+                        </div>
+                        <div class="form-group">
+                            <input hidden id="txt-payment-method" class="input" type="number" name="PaymentMethod" value="0">
+                        </div>
+                    </form>
+                    <!-- /Billing Details -->
+
+                </div>
+
+                <!-- Order Details -->
+
+
+                <div class="col-md-5 order-details">
+                    <div class="section-title text-center">
+                        <h3 class="title">Your Order</h3>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-col">
+                            <div><strong>PRODUCT</strong></div>
+                            <div><strong>TOTAL</strong></div>
+                        </div>
+                        <div class="order-products">
+
+                            @foreach (var item in Model.Items)
+                            {
+                                <div class="order-col">
+                                    <div>@item.Quantity x @item.ProductName</div>
+                                    <div>@item.Price</div>
+                                </div>
+                            }
+
+
+                        </div>
+                        <div class="order-col">
+                            <div>Shiping</div>
+                            <div><strong>FREE</strong></div>
+                        </div>
+                        <div class="order-col">
+                            <div><strong>TOTAL</strong></div>
+                            <div><strong class="order-total">@Model.Items.Sum(s=> s.Quantity*s.Price)</strong></div>
+                        </div>
+                    </div>
+                    <div class="payment-method">
+                        @foreach (var item in Model.ShippingMethod)
+                        {
+                            <div class="input-radio">
+                                <input value="@item.Key" type="radio" name="payment" id="payment-@item.Key">
+                                <label for="payment-@item.Key">
+                                    <span></span>
+                                    @item.Value
+                                </label>
+
+                            </div>
+                        }
+
+                    </div>
+                    <div class="input-checkbox">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">
+                            <span></span>
+                            I've read and accept the <a href="#">terms & conditions</a>
+                        </label>
+                    </div>
+                    <a href="#" id="btn-place-order" class="primary-btn order-submit">Place order</a>
+                </div>
+
+                <!-- /Order Details -->
+            </div>
+        }
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

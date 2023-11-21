@@ -1,0 +1,55 @@
+﻿@model List<Infrastructure.Products.ProductViewModel>
+<!-- product -->
+@foreach (var item in Model)
+{
+    <div class="col-md-4 col-xs-6">
+        <div class="product">
+            <div class="product-img">
+                <img src="@item.Image" alt="">
+                <div class="product-label">
+                    @if (item.DiscountPrice.HasValue)
+                    {
+                        var discount = ((item.Price -item.DiscountPrice)/item.Price)*100;
+                        <span class="sale">-@discount%</span>
+                    }
+                    
+                    <span class="new">NEW</span>
+                </div>
+            </div>
+            <div class="product-body">
+                <p class="product-category">@item.CategoryName</p>
+                <h3 class="product-name"><a href="#">@item.Name</a></h3>
+                @if (item.DiscountPrice.HasValue)
+                {
+                    <h4 class="product-price">@item.DiscountPrice <del class="product-old-price">@item.Price</del></h4>
+                }
+                else
+                {
+                    <h4 class="product-price">@item.Price</h4>
+                }
+                @if (item.Rating.HasValue)
+                {
+                    <div class="product-rating">
+                        @for (int i = 0; i < +item.Rating.Value; i++)
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                    </div>
+                }
+
+                <div class="product-btns">
+                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                </div>
+            </div>
+            <div class="add-to-cart">
+                <button data-id="@item.Id" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+            </div>
+        </div>
+    </div>
+    <!-- /product -->
+}
+
+
+

@@ -1,0 +1,92 @@
+﻿@using Infrastructure.Enums;
+@section script{
+   <script src="~/js/product/index.js"></script>
+}
+@model TechShop.Models.ProductIndexModel
+<p id="txt-categoryId" hidden>@Model.CategoryId</p>
+<p id="txt-keyword" hidden>@Model.KeyWord</p>
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="breadcrumb-tree">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">All Categories</a></li>
+					<li><a href="#">Accessories</a></li>
+					<li class="active">Headphones (227,490 Results)</li>
+				</ul>
+			</div>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- ASIDE -->
+			@await Html.PartialAsync("~/Views/Shared/_SideBar.cshtml", Model.Categories)
+			<!-- /ASIDE -->
+			<!-- STORE -->
+			<div id="store" class="col-md-9">
+				<!-- store top filter -->
+				<div class="store-filter clearfix">
+					<div class="store-sort">
+						<label>
+							Sort By:
+							<select class="input-select" id="product-order-by">
+								@foreach (var item in Model.OrderBys)
+								{
+									<option value="@item.Value">@item.Name</option>
+								}
+								
+							
+								
+							</select>
+						</label>
+
+						<label>
+							Show:
+							<select class="input-select" id="product-page-size">
+								@foreach (var item in Model.SelectPageSize)
+								{
+									<option value="@item">@item</option>
+								}
+
+								
+							</select>
+						</label>
+					</div>
+					<ul class="store-grid">
+						<li class="active"><i class="fa fa-th"></i></li>
+						<li><a href="#"><i class="fa fa-th-list"></i></a></li>
+					</ul>
+				</div>
+				<!-- /store top filter -->
+				<!-- store products -->
+				<div class="row" id="product-list-partial">
+
+				</div>
+				<!-- /store products -->
+				<!-- store bottom filter -->
+				<div class="store-filter clearfix">
+					<span class="store-qty">Showing 20-100 products</span>
+					<button id="btn-load-more" class="btn btn-success">Xem thêm</button>
+				</div>
+				<!-- /store bottom filter -->
+			</div>
+			<!-- /STORE -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
