@@ -1,0 +1,76 @@
+﻿@model List<Infrastructure.Categories.CategoryViewModel>
+<div class="page-container">
+
+    <div class="page-content">
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                    <div class="portlet light">
+                        <div class="portlet-title">
+
+                            <div class="caption col-md-12">
+                                <span class="caption-subject font-green-sharp bold uppercase">
+                                    Quản lý khóa học
+                                </span>
+                            </div>
+
+@*                            <div class="portlet-body">
+
+                                <div class="table-toolbar">
+
+                                    <div class="col-md-3 col-sm-12 col-xs-12 pull-left">
+                                        <a class="btn btn-success" href="/category/create" data-toggle="modal" id="btn-add">Tạo mới</a>
+
+                                    </div>                                  
+                                </div>
+
+                            </div>
+                        </div>*@
+
+                        <div class="table-responsive col-md-12">
+                            <table class="table table-bordered table-hover table-striped table-responsive">
+                                <thead>
+                                    <tr class="text-center">
+                                        <td>Category Id</td>
+                                        <td>Product Name</td>
+                                        <td>Quantity</td>
+                                        <td>Utilites</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-content">
+                                    @*partial view*@
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="text-center">
+                                            <td> @item.Id</td>
+                                            <td> @item.Name</td>
+                                            <td> @item.ProductCount</td>
+                                            <td class="text-center">
+                                                <a class="btn default btn-xs green" href="@item.Image" title="Watch Images"><span class="glyphicon glyphicon-list-alt"></span></a>
+
+                                                <a class="btn default btn-xs red" href="/" title="Delete">  <span class="glyphicon glyphicon-trash"></span></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                            <div class="pagination" id="pagination"></div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!--Modal arear-->
+    </div>
+</div>
+

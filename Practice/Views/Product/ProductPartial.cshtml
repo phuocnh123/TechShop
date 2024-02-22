@@ -1,0 +1,12 @@
+﻿@model List<LearnProductViewModel>
+@foreach (var item in Model)
+{
+    <div>
+
+        <p>@item.CategoryName</p>
+        <p>@item.Name</p>
+        <p>@item.Price</p>
+        <hr>
+    </div>
+
+}

@@ -1,0 +1,47 @@
+﻿@model List<CartItemViewModel>
+@{
+
+}
+
+    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+        <i class="fa fa-shopping-cart"></i>
+        <span>Your Cart</span>
+        @if (Model != null && Model.Any())
+        {
+            <div class="qty">@Model.Sum(s=> s.Quantity)</div>
+        }
+
+    </a>
+    @if (Model != null && Model.Any())
+    {
+        <div class="cart-dropdown">
+            <div class="cart-list">
+
+                @foreach (var item in Model)
+                {
+                    <div class="product-widget">
+                        <div class="product-img">
+                            <img src="@item.Image" alt="">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-name"><a href="#">@item.ProductName</a></h3>
+                            <h4 class="product-price"><span class="qty">@item.Quantity</span>@item.Price</h4>
+                        </div>
+                        <button data-name="@item.ProductName" data-id="@item.ProductId" class="delete remove-item"><i class="fa fa-close"></i></button>
+                    </div>
+                }
+
+            </div>
+
+            <div class="cart-summary">
+                <small>@Model.Count Item(s) selected</small>
+                <h5>SUBTOTAL: @Model.Sum(s=> s.Quantity*s.Price)</h5>
+            </div>
+
+            <div class="cart-btns">
+                <a href="/checkout/index">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+    }
+
